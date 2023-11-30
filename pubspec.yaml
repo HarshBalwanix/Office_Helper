@@ -37,6 +37,7 @@ dependencies:
   google_mlkit_text_recognition: ^0.4.0
   image_picker: ^0.8.5+3
   image_cropper: ^3.0.0
+  translator: ^0.1.7
   flutter_tesseract_ocr: ^0.4.24
 
 dev_dependencies:
@@ -90,4 +91,4 @@ flutter:
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+  # see https://flutter.dev/custom-fonts/#from-packagess

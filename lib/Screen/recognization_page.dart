@@ -1,11 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:ocr/Screen/recognization_page.dart';
-import 'package:ocr/Utils/image_cropper_page.dart';
-import 'package:ocr/Utils/image_picker_class.dart';
-import 'package:ocr/Widgets/modal_dialog.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:ocr/Screen/translator.dart'; // Import the translator.dart file
 
 class RecognizePage extends StatefulWidget {
   final String? path;
@@ -32,7 +28,7 @@ class _RecognizePageState extends State<RecognizePage> {
     final InputImage inputImage = InputImage.fromFilePath(widget.path!);
 
     processImage(inputImage);
-    
+
     // Set the initial value of the controller
     controller.text = widget.extractedText;
   }
@@ -40,7 +36,7 @@ class _RecognizePageState extends State<RecognizePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("recognized page")),
+      appBar: AppBar(title: const Text("Recognized Page")),
       body: _isBusy == true
           ? const Center(
               child: CircularProgressIndicator(),
@@ -54,11 +50,26 @@ class _RecognizePageState extends State<RecognizePage> {
                     const InputDecoration(hintText: "Text goes here..."),
               ),
             ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the translation page (translator.dart)
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TranslatorApp(
+                originalText: controller.text,
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.translate),
+      ),
     );
   }
 
   void processImage(InputImage image) async {
-    final textRecognizer = TextRecognizer(script: TextRecognitionScript.devanagiri);
+    final textRecognizer =
+        TextRecognizer(script: TextRecognitionScript.devanagiri);
 
     setState(() {
       _isBusy = true;
