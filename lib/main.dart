@@ -7,6 +7,9 @@ import 'package:ocr/Screen/recognization_page.dart';
 import 'package:ocr/Utils/image_cropper_page.dart';
 import 'package:ocr/Utils/image_picker_class.dart';
 import 'package:ocr/Widgets/modal_dialog.dart';
+import 'package:ocr/Screen/translator.dart';
+import 'package:ocr/Screen/translator2.dart';
+import 'package:ocr/Screen/speecht.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +17,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +25,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false, // Remove debug tag
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(title: 'Office Helper'),
+        '/translator': (context) => const TranslatorApp(),
+        '/translator2': (context) => Translator2App(),
+        '/speecht': (context) => SpeechToTextApp(),
+      },
     );
   }
 }
@@ -36,12 +47,58 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  void _scanPhoto() {
+    imagePickerModal(context, onCameraTap: () {
+      log("Camera");
+      pickImage(source: ImageSource.camera).then((value) {
+        if (value != '') {
+          imageCropperView(value, context).then((value) {
+            if (value != '') {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (_) => RecognizePage(
+                    path: value,
+                    extractedText: '',
+                  ),
+                ),
+              );
+            }
+          });
+        }
+      });
+    }, onGalleryTap: () {
+      log("Gallery");
+      pickImage(source: ImageSource.gallery).then((value) {
+        if (value != '') {
+          imageCropperView(value, context).then((value) {
+            if (value != '') {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (_) => RecognizePage(
+                    path: value,
+                    extractedText: '',
+                  ),
+                ),
+              );
+            }
+          });
+        }
+      });
     });
+  }
+
+  void _navigateToTranslator() {
+    Navigator.pushNamed(context, '/translator');
+  }
+
+  void _navigateToUnicodeConverter() {
+    Navigator.pushNamed(context, '/translator2');
+  }
+
+  void _navigateToSpeechToText() {
+    Navigator.pushNamed(context, '/speecht');
   }
 
   @override
@@ -54,60 +111,75 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            ElevatedButton(
+              onPressed: _scanPhoto,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
+              child: const Text(
+                "Scan Photo",
+                style: TextStyle(fontSize: 18),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _navigateToTranslator,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
+              child: const Text(
+                "Translator",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _navigateToUnicodeConverter,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.orange,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
+              child: const Text(
+                "Unicode Converter",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _navigateToSpeechToText,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
+              child: const Text(
+                "Speech to Text",
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          imagePickerModal(context, onCameraTap: () {
-            log("Camera");
-            pickImage(source: ImageSource.camera).then((value) {
-              if (value != '') {
-                imageCropperView(value, context).then((value) {
-                  if (value != '') {
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (_) => RecognizePage(
-                          path: value,
-                          extractedText: '',
-                        ),
-                      ),
-                    );
-                  }
-                });
-              }
-            });
-          }, onGalleryTap: () {
-            log("Gallery");
-            pickImage(source: ImageSource.gallery).then((value) {
-              if (value != '') {
-                imageCropperView(value, context).then((value) {
-                  if (value != '') {
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (_) => RecognizePage(
-                          path: value,
-                          extractedText: '',
-                        ),
-                      ),
-                    );
-                  }
-                });
-              }
-            });
-          });
-        },
-        tooltip: 'Increment',
-        label: const Text("Scan photo"),
       ),
     );
   }
