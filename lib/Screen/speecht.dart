@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,12 +22,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   void initSpeech() async {
-    _speechEnabled = await _speechToText.initialize();
+    _speechEnabled = await _speechToText.initialize(
+      onStatus: (status) {
+        print('Speech recognition status: $status');
+      },
+    );
     setState(() {});
   }
 
   void _startListening() async {
-    await _speechToText.listen(onResult: _onSpeechResult);
+    await _speechToText.listen(
+      onResult: _onSpeechResult,
+      localeId: 'hi_IN', // Set the locale to Hindi
+    );
     setState(() {
       _confidenceLevel = 0;
     });
@@ -64,7 +71,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(16),
               child: Text(
                 _speechToText.isListening
-                    ? "listening..."
+                    ? "Listening..."
                     : _speechEnabled
                         ? "Tap the microphone to start listening..."
                         : "Speech not available",
@@ -74,7 +81,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Container(
                 padding: EdgeInsets.all(16),
-                child: Text(
+                child: SelectableText(
                   _wordsSpoken,
                   style: const TextStyle(
                     fontSize: 25,
