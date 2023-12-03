@@ -1,65 +1,112 @@
 import 'package:flutter/material.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
-void main() {
-  runApp(SpeechToTextApp());
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
 }
 
-class SpeechToTextApp extends StatelessWidget {
+class _HomePageState extends State<HomePage> {
+  final SpeechToText _speechToText = SpeechToText();
+
+  bool _speechEnabled = false;
+  String _wordsSpoken = "";
+  double _confidenceLevel = 0;
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Speech to Text App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SpeechToTextHomePage(),
-    );
+  void initState() {
+    super.initState();
+    initSpeech();
   }
-}
 
-class SpeechToTextHomePage extends StatefulWidget {
-  @override
-  _SpeechToTextHomePageState createState() => _SpeechToTextHomePageState();
-}
+  void initSpeech() async {
+    _speechEnabled = await _speechToText.initialize();
+    setState(() {});
+  }
 
-class _SpeechToTextHomePageState extends State<SpeechToTextHomePage> {
-  String recognizedSpeech = '';
+  void _startListening() async {
+    await _speechToText.listen(onResult: _onSpeechResult);
+    setState(() {
+      _confidenceLevel = 0;
+    });
+  }
 
-  // Implement your speech-to-text logic here
+  void _stopListening() async {
+    await _speechToText.stop();
+    setState(() {});
+  }
+
+  void _onSpeechResult(result) {
+    setState(() {
+      _wordsSpoken = "${result.recognizedWords}";
+      _confidenceLevel = result.confidence;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Speech to Text App'),
+        backgroundColor: Colors.red,
+        title: Text(
+          'Speech Demo',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Recognized Speech:',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            Container(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                _speechToText.isListening
+                    ? "listening..."
+                    : _speechEnabled
+                        ? "Tap the microphone to start listening..."
+                        : "Speech not available",
+                style: TextStyle(fontSize: 20.0),
+              ),
             ),
-            SizedBox(height: 8),
-            Text(
-              recognizedSpeech,
-              style: TextStyle(fontSize: 16),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  _wordsSpoken,
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ),
             ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // Implement the logic to start speech recognition
-                // Set the recognized speech text in the state
-                setState(() {
-                  recognizedSpeech = 'This is a sample recognized speech.';
-                });
-              },
-              child: Text('Start Speech Recognition'),
-            ),
+            if (_speechToText.isNotListening && _confidenceLevel > 0)
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 100,
+                ),
+                child: Text(
+                  "Confidence: ${(_confidenceLevel * 100).toStringAsFixed(1)}%",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w200,
+                  ),
+                ),
+              )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _speechToText.isListening ? _stopListening : _startListening,
+        tooltip: 'Listen',
+        child: Icon(
+          _speechToText.isNotListening ? Icons.mic_off : Icons.mic,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.red,
       ),
     );
   }

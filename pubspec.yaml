@@ -39,6 +39,7 @@ dependencies:
   image_cropper: ^3.0.0
   translator: ^0.1.7
   flutter_tesseract_ocr: ^0.4.24
+  speech_to_text: ^6.3.0
 
 dev_dependencies:
   flutter_test:

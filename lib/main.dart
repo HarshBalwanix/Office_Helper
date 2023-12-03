@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MyHomePage(title: 'Office Helper'),
         '/translator': (context) => const TranslatorApp(),
-        '/translator2': (context) => Translator2App(),
-        '/speecht': (context) => SpeechToTextApp(),
+        '/translator2': (context) => const Translator2App(),
+        '/speecht': (context) => const HomePage(),
       },
     );
   }
