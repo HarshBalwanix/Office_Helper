@@ -29,7 +29,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: 'Office Helper'),
-        '/translator': (context) => const TranslatorApp(),
+        '/translator': (context) => const TranslatorApp(
+              originalText: '',
+            ),
         '/translator2': (context) => const Translator2App(),
         '/speecht': (context) => const HomePage(),
         '/speecht2': (context) => const HomePage2(),

@@ -1,18 +1,38 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
 
 class TranslatorApp extends StatefulWidget {
-  final String? originalText;
-  const TranslatorApp({Key? key, this.originalText}) : super(key: key);
+  const TranslatorApp({super.key, required String originalText});
 
   @override
   State<TranslatorApp> createState() => _TranslatorAppState();
 }
 
 class _TranslatorAppState extends State<TranslatorApp> {
-  List<String> languages = ['English', 'Hindi'];
-  List<String> languagescode = ['en', 'hi'];
+  List<String> languages = [
+    'English',
+    'Hindi',
+    'Arabic	',
+    'German',
+    'Russian',
+    'Spanish',
+    'Urdu',
+    'Japanese	',
+    'Italian'
+  ];
+  List<String> languagescode = [
+    'en',
+    'hi',
+    'ar',
+    'de',
+    'ru',
+    'es',
+    'ur',
+    'ja',
+    'it'
+  ];
   final translator = GoogleTranslator();
   String from = 'en';
   String to = 'hi';
@@ -49,9 +69,15 @@ class _TranslatorAppState extends State<TranslatorApp> {
 
   @override
   void dispose() {
+    // TODO: implement dispose
     super.dispose();
     controller.dispose();
   }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   translate();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -100,15 +126,30 @@ class _TranslatorAppState extends State<TranslatorApp> {
                           from = languagescode[0];
                         } else if (lang == languages[1]) {
                           from = languagescode[1];
+                        } else if (lang == languages[2]) {
+                          from = languagescode[2];
+                        } else if (lang == languages[3]) {
+                          from = languagescode[3];
+                        } else if (lang == languages[4]) {
+                          from = languagescode[4];
+                        } else if (lang == languages[5]) {
+                          from = languagescode[5];
+                        } else if (lang == languages[6]) {
+                          from = languagescode[6];
+                        } else if (lang == languages[7]) {
+                          from = languagescode[7];
+                        } else if (lang == languages[8]) {
+                          from = languagescode[8];
                         }
-                        setState(() {});
+                        setState(() {
+                          // print(lang);
+                          // print(from);
+                        });
                       },
                     );
                   }).toList(),
-                  onChanged: (String? value) {
-                    if (value != null) {
-                      selectedvalue = value;
-                    }
+                  onChanged: (value) {
+                    selectedvalue = value as String;
                   },
                 )
               ],
@@ -170,15 +211,30 @@ class _TranslatorAppState extends State<TranslatorApp> {
                           to = languagescode[0];
                         } else if (lang == languages[1]) {
                           to = languagescode[1];
+                        } else if (lang == languages[2]) {
+                          to = languagescode[2];
+                        } else if (lang == languages[3]) {
+                          to = languagescode[3];
+                        } else if (lang == languages[4]) {
+                          to = languagescode[4];
+                        } else if (lang == languages[5]) {
+                          to = languagescode[5];
+                        } else if (lang == languages[6]) {
+                          to = languagescode[6];
+                        } else if (lang == languages[7]) {
+                          to = languagescode[7];
+                        } else if (lang == languages[8]) {
+                          to = languagescode[8];
                         }
-                        setState(() {});
+                        setState(() {
+                          print(lang);
+                          print(from);
+                        });
                       },
                     );
                   }).toList(),
-                  onChanged: (String? value) {
-                    if (value != null) {
-                      selectedvalue = value;
-                    }
+                  onChanged: (value) {
+                    selectedvalue2 = value as String;
                   },
                 )
               ],
