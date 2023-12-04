@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
+class HomePage2 extends StatefulWidget {
+  const HomePage2({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage2> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage2> {
   final SpeechToText _speechToText = SpeechToText();
 
   bool _speechEnabled = false;
@@ -22,19 +22,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   void initSpeech() async {
-    _speechEnabled = await _speechToText.initialize(
-      onStatus: (status) {
-        print('Speech recognition status: $status');
-      },
-    );
+    _speechEnabled = await _speechToText.initialize();
     setState(() {});
   }
 
   void _startListening() async {
-    await _speechToText.listen(
-      onResult: _onSpeechResult,
-      localeId: 'hi_IN', // Set the locale to Hindi
-    );
+    await _speechToText.listen(onResult: _onSpeechResult);
     setState(() {
       _confidenceLevel = 0;
     });
@@ -58,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text(
-          'Hindi Text Generator',
+          'English Text Generator',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -69,9 +62,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               padding: EdgeInsets.all(16),
-              child: Text(
+              child: SelectableText(
                 _speechToText.isListening
-                    ? "Listening..."
+                    ? "listening..."
                     : _speechEnabled
                         ? "Tap the microphone to start listening..."
                         : "Speech not available",

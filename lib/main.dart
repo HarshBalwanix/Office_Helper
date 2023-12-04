@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:ocr/Screen/speecht2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/translator': (context) => const TranslatorApp(),
         '/translator2': (context) => const Translator2App(),
         '/speecht': (context) => const HomePage(),
+        '/speecht2': (context) => const HomePage2(),
       },
     );
   }
@@ -99,6 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _navigateToSpeechToText() {
     Navigator.pushNamed(context, '/speecht');
+  }
+
+  void _navigateToSpeechToText2() {
+    Navigator.pushNamed(context, '/speecht2');
   }
 
   @override
@@ -174,7 +179,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               ),
               child: const Text(
-                "Speech to Text",
+                "Speech to Text Hindi ",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _navigateToSpeechToText2,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
+              child: const Text(
+                "Speech to Text English ",
                 style: TextStyle(fontSize: 18),
               ),
             ),
