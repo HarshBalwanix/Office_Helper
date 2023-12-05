@@ -84,7 +84,7 @@ Before you start, make sure you have Flutter and Dart installed. You can downloa
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/geobot-flutter.git
+   git clone https://github.com/HarshBalwanix/OCR_flutter.git
    cd office-helper
    ```
 2. Install the required packages:
