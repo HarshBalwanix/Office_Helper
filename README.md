@@ -1,13 +1,13 @@
 # Office Helper
 Office Helper is a productivity-targeted cell utility designed to help office specialists in enhancing their workflow efficiency and decreasing the time required for specific tasks. This app is specially useful for authorities offices wherein Hindi is predominantly used. It addresses the undertaking of transitioning from conventional Hindi fonts to Unicode, making it consumer-pleasant for both English and Hindi typists.
 ## Table of Contents
-Features
-Screenshots
-Getting Started
-Prerequisites
-Installation
-Usage
-Contributing
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+
 
 ## Features
 
