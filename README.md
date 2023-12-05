@@ -34,7 +34,7 @@ Click here to download the apk release version of this app.
 
 ## Screenshots
 ### Demo of Main Page
-<img src="https://github.com/HarshBalwanix/OCR_flutter/assets/91670912/358dd217-ae22-47b2-ba50-aeddf1a3ff49" width="300">
+<img src="https://github.com/HarshBalwanix/OCR_flutter/assets/91670912/358dd217-ae22-47b2-ba50-aeddf1a3ff49" width="200">
 
 
 ### Demo of Devlys010 to Unicode
