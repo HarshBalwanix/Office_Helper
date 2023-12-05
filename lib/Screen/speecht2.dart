@@ -61,19 +61,19 @@ class _HomePageState extends State<HomePage2> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: SelectableText(
                 _speechToText.isListening
                     ? "listening..."
                     : _speechEnabled
                         ? "Tap the microphone to start listening..."
                         : "Speech not available",
-                style: TextStyle(fontSize: 20.0),
+                style: const TextStyle(fontSize: 20.0),
               ),
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: SelectableText(
                   _wordsSpoken,
                   style: const TextStyle(
