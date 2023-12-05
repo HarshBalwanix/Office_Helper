@@ -33,7 +33,7 @@ Office Helper is a productivity-targeted cell utility designed to help office sp
 
 ## Screenshots
 ### Demo of Main Page
-![9c8bef5e-9790-404e-b6ff-812e49e03f01](https://github.com/HarshBalwanix/OCR_flutter/assets/91670912/358dd217-ae22-47b2-ba50-aeddf1a3ff49)
+<img src="https://github.com/HarshBalwanix/OCR_flutter/assets/91670912/358dd217-ae22-47b2-ba50-aeddf1a3ff49" width="400">
 
 
 ### Demo of Devlys010 to Unicode
