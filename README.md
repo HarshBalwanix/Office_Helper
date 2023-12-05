@@ -1,5 +1,6 @@
 # Office Helper
 Office Helper is a productivity-targeted cell utility designed to help office specialists in enhancing their workflow efficiency and decreasing the time required for specific tasks. This app is specially useful for authorities offices wherein Hindi is predominantly used. It addresses the undertaking of transitioning from conventional Hindi fonts to Unicode, making it consumer-pleasant for both English and Hindi typists.
+Click here to download the apk release version of this app.
 ## Table of Contents
 - [Features](#features)
 - [Screenshots](#screenshots)
@@ -33,7 +34,7 @@ Office Helper is a productivity-targeted cell utility designed to help office sp
 
 ## Screenshots
 ### Demo of Main Page
-<img src="https://github.com/HarshBalwanix/OCR_flutter/assets/91670912/358dd217-ae22-47b2-ba50-aeddf1a3ff49" width="400">
+<img src="https://github.com/HarshBalwanix/OCR_flutter/assets/91670912/358dd217-ae22-47b2-ba50-aeddf1a3ff49" width="300">
 
 
 ### Demo of Devlys010 to Unicode
